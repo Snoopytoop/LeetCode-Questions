@@ -1,0 +1,74 @@
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        String res = "";
+        if (str1 == str2) {
+
+
+            return str1;
+        } else if (str1.contains(str2) || str2.contains(str1)) {
+            String shorty = "";
+            String longy = "";
+
+            if (str1.length() > str2.length()) {
+                longy = str1;
+                shorty = str2;
+            } else {
+                longy = str2;
+                shorty = str1;
+            }
+
+            String possible = "";
+
+            for (int i = 0; i < shorty.length(); i++) {
+                int pos = i + 1;
+                String section = shorty.substring(0, pos);
+
+                if (shorty.length() % pos == 0 && longy.length() % pos == 0) {
+                    String[] arr1 = new String[str1.length() / pos];
+                    String[] arr2 = new String[str2.length() / pos];
+
+                    for (int j = 0; j < str1.length(); j += pos) {
+                        String sectiony = str1.substring(j, j + pos);
+                        arr1[j / pos] = sectiony;
+                    }
+
+                    for (int j = 0; j < str2.length(); j += pos) {
+                        String sectiony = str2.substring(j, j + pos);
+                        arr2[j / pos] = sectiony;
+                    }
+
+                    
+
+                    boolean check = true;
+
+                    for (int j = 0; j < arr1.length; j++) {
+                        if (!arr1[j].equals(arr1[0])) {
+                            check = false;
+                        }
+                    }
+
+                    for (int j = 0; j < arr2.length; j++) {
+                        if (!arr2[j].equals(arr2[0])) {
+                            check = false;
+                        }
+                    }
+
+                    if (!arr1[0].equals(arr2[0])) {
+                        check = false;
+                    }
+
+                    if (check == true) {
+                        possible = section;
+                    }
+                    
+                }
+
+            }
+
+            return possible;
+
+        } else {
+            return res;
+        }
+    }
+}
